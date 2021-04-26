@@ -6,6 +6,7 @@ total_score = 0
 
 order = [0, 1, 2, 3];
 for item in itertools.permutations(order):
+    total_score = 0
     for i in tqdm.tqdm(range(100)):
         file_path = "testcase/" + '0' * (4 - len(str(i))) + str(i) + '.txt';
         com = "./solve.out {} {} {} {} < {}".format(item[0], item[1], item[2], item[3], file_path)
