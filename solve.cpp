@@ -265,7 +265,6 @@ int main (int argc, char *argv[]) {
     // debug(get_time());
     return 0;
 }
-
 int order[4] = {0, 1, 2, 3};
 
 double start_time = -1;
@@ -343,9 +342,9 @@ void walk(pii s, vector<bool> vis, int score, string path){
 int main (int argc, char *argv[]) {
     TIME(main);
     IOS();
-    for(int i=0;i<4;i++){
-        order[0] = argv[i+1][0] - '0';
-    }
+    // for(int i=0;i<4;i++){
+    //     order[0] = argv[i+1][0] - '0';
+    // }
     pii s;
     cin >> s.X >> s.Y;
     ti.resize(50, vector<int>(50));
