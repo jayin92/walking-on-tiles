@@ -14,5 +14,8 @@ for item in itertools.permutations(order):
         out = int(sub_pro.stdout.read())
         total_score += out
         # print(out)
-
-    print(item, " Score:", total_score)
+    
+    res = "{} Score: {}".format(item, total_score);
+    print(res);
+    with open("results.txt", "a") as file:
+        file.write(res)
