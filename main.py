@@ -12,11 +12,11 @@ for item in itertools.permutations(order):
         com = "./solve.out {} {} {} {} < {}".format(item[0], item[1], item[2], item[3], file_path)
 
         sub_pro = subprocess.Popen(com, shell=True, stdout=subprocess.PIPE);
+        
         out = int(sub_pro.stdout.read())
         total_score += out
-        # print(out)
     
-    res = "{} Score: {}".format(item, total_score);
-    print(res);
+    res = "{} Score: {}".format(item, total_score)
+    print(res)
     with open("results.txt", "a") as file:
         file.write(res+"\n")

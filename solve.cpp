@@ -122,7 +122,7 @@ inline pii add(pii a, pii b){
     return make_pair(a.X + b.X, a.Y + b.Y);
 }
  
-void walk(pii s, vector<bool> vis, int score, string path){
+void walk(pii s, vector<bool> vis, long long score, string path){
 
     if(get_time() >= TL) return;
     vis[ti[s.X][s.Y]] = true;
@@ -162,7 +162,7 @@ int main (int argc, char *argv[]) {
     TIME(main);
     IOS();
     for(int i=0;i<4;i++){
-        order[0] = argv[i+1][0] - '0';
+        order[i] = argv[i+1][0] - '0';
     }
     pii s;
     cin >> s.X >> s.Y;
