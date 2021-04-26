@@ -18,4 +18,4 @@ for item in itertools.permutations(order):
     res = "{} Score: {}".format(item, total_score);
     print(res);
     with open("results.txt", "a") as file:
-        file.write(res)
+        file.write(res+"\n")
