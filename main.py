@@ -15,11 +15,4 @@ for item in itertools.permutations(order):
         total_score += out
         # print(out)
 
-    print(item, " Score:", total_score)for i in tqdm.tqdm(range(100)):
-    file_path = "testcase/" + '0' * (4 - len(str(i))) + str(i) + '.txt';
-    com = "./solve.out < {}".format(file_path)
-
-    sub_pro = subprocess.Popen(com, shell=True, stdout=subprocess.PIPE);
-    out = int(sub_pro.stdout.read())
-    total_score += out
-    # print(out)
+    print(item, " Score:", total_score)
