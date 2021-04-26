@@ -1,5 +1,8 @@
 #include <bits/stdc++.h>
+#include <sys/time.h>
+
 using namespace std;
+
 typedef long long ll;
 typedef pair<int, int> pii;
 typedef pair<ll, ll> pll;
@@ -73,19 +76,41 @@ const ll INF = 0x3f3f3f3f3f3f3f3f;
 const int iNF = 0x3f3f3f3f;
 const ll MAXN = 100005;
 const int N = 50;
+const double TL = 1.95;
+
  
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
- 
+
 pii d[4] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 char con[4] = {'D', 'U', 'R', 'L'};
- 
- 
+
+int order[4] = {0, 1, 2, 3};
+
+double start_time = -1;
+bool first_time = true;
+
+double limit = 0;
+
 string ans;
 int max_score = 0;
 int cnt = 0;
 vector<vector<int>> ti, sc;
 int n_tile = 0;
- 
+
+double get_time() {
+    timeval tv;
+    gettimeofday(&tv, 0);
+    auto ret = tv.tv_sec + tv.tv_usec * 1e-6;
+
+    if(first_time) {
+        start_time = ret;
+        first_time = false;
+    }
+
+    return ret - start_time;
+}
+
+
 inline bool check(pii nxt, vector<bool> vis){
     if(nxt.X >= N || nxt.Y >= N || nxt.X < 0 || nxt.Y < 0) return false;
     if(vis[ti[nxt.X][nxt.Y]] == true) return false;
@@ -98,20 +123,21 @@ inline pii add(pii a, pii b){
 }
  
 void walk(pii s, vector<bool> vis, int score, string path){
-    if(cnt >= 605000) return;
+
+    if(get_time() >= TL) return;
     vis[ti[s.X][s.Y]] = true;
     score += sc[s.X][s.Y];
     bool flag = true;
  
     // int k = rand() % 4;
     // int k= 2 * (rand() % 2) + 1;
-    int k = 3;
+    // int k = 3;
     int i;
     // vector<int> shu = {0, 1, 2, 3};
     // random_shuffle(ALL(shu));
     for(int j=0;j<4;j++){
         // int i = shu[j];
-        i = (k + j) % 4;
+        i = order[j];
         pii nxt = add(s, d[i]);
         if(check(nxt, vis)){
             flag = false;
@@ -132,9 +158,12 @@ void walk(pii s, vector<bool> vis, int score, string path){
 }
  
 /********** Good Luck :) **********/
-int main () {
+int main (int argc, char *argv[]) {
     TIME(main);
     IOS();
+    for(int i=0;i<4;i++){
+        order[0] = argv[i+1][0] - '0';
+    }
     pii s;
     cin >> s.X >> s.Y;
     ti.resize(50, vector<int>(50));
@@ -143,11 +172,11 @@ int main () {
     REP(i, 50) REP(j, 50) cin >> sc[i][j];
  
     vector<bool> vis(n_tile+5, false);
- 
+    
     walk(s, vis, 0, "");
  
-    cout << ans << endl;
- 
- 
+    // cout << ans << endl;
+    cout << max_score;
+    // debug(get_time());
     return 0;
 }
